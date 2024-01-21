@@ -1,6 +1,6 @@
 # Запуск Chirpstack LoRaWAN Network сервера на WirenBoard на базе концентратора RAK5146 USB
 Общая структура необходимых сервисов для поддержки LoRaWAN выглядит так:
-![[lorawan_chirpstack_architecture.png]]
+![lorawan_chirpstack_architecture](lorawan_chirpstack_architecture.png)
 Ниже будет приведено что нужно ставить и как все это запускать
 ## UDP Packet Forwarder
 ### Сборка сервиса из исходников
@@ -23,7 +23,9 @@ make
 
 ### Запуск
 Если модуль концентратор еще не вставлен в USB разъем - необходимо вставить его. Далее необходимо создать файл конфигурации *global_conf.json* В директории *sx1302_hal/packet_forwarder* лежат некотрое кол-во примеров такого файла для разных частот, интерфейсов (USB, SPI), на основе которых можно создать файл конфигурации. Конфигурация лежит на гитхаб. 
+
 **Есть вопросы по созданию файла, по нескольким пунктам, особенно где узнать, найти, или как создать *GATEWAY_ID*?**
+
 После создания конфигурационного файла его надобно положить в директорию *sx1302_hal/packet_forwarder*.
 Далее можно пробовать запустить сервис *lora_pkt_fwd*:
 ```bash
@@ -42,20 +44,7 @@ JSON up: {"stat":{"time":"2024-01-20 17:43:15 GMT","rxnb":1,"rxok":1,"rxfw":1,"a
 ```
 Если такого рода сообщения появились, то значит все прошло успешно.
 Можно завернуть данный сервис в *systemd*, чтобы он запускался автоматически с запуском системы.
-```bash
-[Unit]
-Description=LoRa UDP Packet Forwarder Service
-After=multi-user.target
 
-[Service]
-User=root
-Type=simple
-Restart=always
-ExecStart=/root/lorawan/sx1302_hal/packet_forwarder/lora_pkt_fwd -c /root/lorawan/sx1302_hal/packet_forwarder/global_conf.json
-
-[Install]
-WantedBy=multi-user.target
-```
 На гитхаб лежит данный файл. Его надо положить в /etc/systemd/system
 Затем выполнить ряд команд:
 ```bash
