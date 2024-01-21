@@ -1,0 +1,12 @@
+[Unit]
+Description=Chirpstack MQTT Packet Forwarder Service
+After=multi-user.target
+
+[Service]
+User=root
+Type=simple
+Restart=always
+ExecStart=/root/lorawan/chirpstack_mqtt_forwarder/chirpstack-mqtt-forwarder -c /root/lorawan/chirpstack_mqtt_forwarder/chirpstack-mqtt-forwarder.toml
+
+[Install]
+WantedBy=multi-user.target

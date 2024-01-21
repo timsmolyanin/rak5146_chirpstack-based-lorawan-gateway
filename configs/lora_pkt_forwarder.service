@@ -1,0 +1,12 @@
+[Unit]
+Description=LoRa UDP Packet Forwarder Service
+After=multi-user.target
+
+[Service]
+User=root
+Type=simple
+Restart=always
+ExecStart=/root/lorawan/sx1302_hal/packet_forwarder/lora_pkt_fwd -c /root/lorawan/sx1302_hal/packet_forwarder/global_conf.json
+
+[Install]
+WantedBy=multi-user.target
