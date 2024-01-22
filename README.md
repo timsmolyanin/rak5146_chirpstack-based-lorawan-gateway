@@ -1,8 +1,13 @@
-# Запуск Chirpstack LoRaWAN Network сервера на WirenBoard на базе концентратора RAK5146 USB
+# Запуск Chirpstack LoRaWAN Network сервера на WirenBoard 7 на базе концентратора RAK5146 USB
+В папке *[configs](https://github.com/timsmolyanin/rak5146_chirpstack-based-lorawan-gateway/tree/main/configs)* лежат конфигурационные файлы для сервисов, а также файлы для *systemd*.
+
+В папке *[distr](https://github.com/timsmolyanin/rak5146_chirpstack-based-lorawan-gateway/tree/main/distr)* лежат исходники *UDP Packet Forwarder* сервиса и скомпилированный *Chirpstack MQTT Forwarder*.
+
+
 Общая структура необходимых сервисов для поддержки LoRaWAN выглядит так (хотя существуют еще варианты, смотреть [здесь](https://www.chirpstack.io/docs/architecture.html)::
 ![lorawan_chirpstack_architecture](pics/lorawan_chirpstack_architecture.png)
 Ниже перечислены используемые программно-аппаратные решения со ссылками на них:
-- **[Wirenboard 7](https://wirenboard.com/wiki/Wiren_Board_7.4) (HW: 7.3.3E/6). ОС Debian 11 bullseye**;
+- **[Wirenboard 7](https://wirenboard.com/wiki/Wiren_Board_7.4) (HW: 7.3.3E/6). ОС Debian 11 bullseye** (wb-2401);
 - **[RAK5146](https://docs.rakwireless.com/Product-Categories/WisLink/RAK5146/Datasheet/#overview) USB концентратор**;
 - **[mPCIe to USB Board](https://store.rakwireless.com/products/mpcie-to-usb-board)**;
 - **[LHT52 Temperature and Humidity sensor](https://www.dragino.com/products/temperature-humidity-sensor/item/199-lht52.html)**;
@@ -267,7 +272,7 @@ chirpstack -c /etc/chirpstack import-legacy-lorawan-devices-repository -d /opt/l
 После всех этих дел находим на датчике кнопку (а если в датчике нет батарейки - вставляем) и нажимаем коротко один раз. Датчик должен добавиться.
 
 ## Доступ к данным из сторонних приложений
-Данные с добавленного датчика доступны в MQTT брокере. Например можно в этом убедиться поглядев в [*MQTT Explorer*]().
+Данные с добавленного датчика доступны в MQTT брокере. Например можно в этом убедиться поглядев в [*MQTT Explorer*](http://mqtt-explorer.com/).
 ![lorawan_mqtt_explorer.png](pics/lorawan_mqtt_explorer.png).
 
 Данные можно забрать питоновским скриптом, соответственно:
